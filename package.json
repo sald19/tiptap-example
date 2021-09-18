@@ -10,18 +10,20 @@
   "dependencies": {
     "@tiptap/starter-kit": "2.0.0-beta.104",
     "@tiptap/vue-2": "2.0.0-beta.50",
-    "@vue/cli-plugin-babel": "4.1.1",
-    "autoprefixer": "^10.3.4",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.15",
-    "vue": "^2.6.11"
+    "autoprefixer": "^9.8.6",
+    "core-js": "^3.6.5",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "4.1.1",
-    "@vue/cli-service": "4.1.1",
-    "babel-eslint": "^10.0.3",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.0.1",
+    "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -36,11 +38,6 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
     }
   },
   "browserslist": [
