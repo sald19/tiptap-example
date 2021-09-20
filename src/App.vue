@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-screen bg-gray-50">
     <tiptap-editor v-model="content" />
   </div>
 </template>
