@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2 border border-gray-300 rounded" v-if="editor">
+  <div class="m-2 border border-gray-200 rounded" v-if="editor">
     <menu-bar :editor="editor" />
 
     <editor-content :editor="editor" class="h-48 overflow-y-auto" />

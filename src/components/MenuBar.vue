@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-around border-b">
+  <div class="flex justify-around border-b border-gray-100 py-1">
     <template v-for="(item, index) in items">
       <div
         class="divide-x divide-gray-200"

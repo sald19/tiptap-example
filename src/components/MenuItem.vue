@@ -1,7 +1,11 @@
 <template>
   <button
-    class=" w-8 h-8 text-gray-800 rounded fill-current hover:text-white hover:bg-blue-700 hover:text-color-white items-center p-2"
-    :class="{ 'is-active': isActive ? isActive() : null }"
+    :class="[
+      {
+        ['isActive']: isActive(),
+      },
+      `w-8 h-8 text-gray-800 rounded fill-current items-center p-2`,
+    ]"
     @click="action"
     :title="title"
   >
@@ -33,7 +37,7 @@ export default {
 
     isActive: {
       type: Function,
-      default: null,
+      default: () => {},
     },
   },
 
@@ -46,12 +50,7 @@ export default {
 </script>
 
 <style>
-.menu-item {
-  color: #0d0d0d;
-  border: none;
-  background-color: transparent;
-  border-radius: 0.4rem;
-  padding: 0.25rem;
-  margin-right: 0.25rem;
+button.isActive {
+  @apply text-white bg-blue-700;
 }
 </style>
