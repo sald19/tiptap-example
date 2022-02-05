@@ -2,17 +2,18 @@
   <div class="m-2 border border-gray-200 bg-white rounded" v-if="editor">
     <menu-bar :editor="editor" />
 
-    <editor-content :editor="editor" class="h-48 overflow-y-auto" />
+    <editor-content :editor="editor" class="h-90 overflow-y-auto" />
   </div>
 </template>
 
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-2";
-import * as Y from "yjs";
+import { getSchema } from "@tiptap/core";
+import { prosemirrorJSONToYDoc, yDocToProsemirrorJSON } from "y-prosemirror";
 import { WebrtcProvider } from "y-webrtc";
-import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
 import CharacterCount from "@tiptap/extension-character-count";
 import Collaboration from "@tiptap/extension-collaboration";
+import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
 import Highlight from "@tiptap/extension-highlight";
 import StarterKit from "@tiptap/starter-kit";
 import TaskItem from "@tiptap/extension-task-item";
@@ -30,17 +31,38 @@ export default {
 
   props: {
     value: {
-      type: String,
-      default: "",
+      type: Object,
+      default: () => {},
     },
   },
 
   data() {
-    return { editor: null, provider: null };
+    return {
+      editor: null,
+      provider: null,
+      extensions: [
+        CharacterCount.configure({
+          limit: 10000,
+        }),
+        Highlight,
+        StarterKit.configure({
+          history: false,
+        }),
+        TaskItem,
+        TaskList,
+      ],
+    };
   },
 
   mounted() {
-    const ydoc = new Y.Doc();
+    const schema = getSchema(this.extensions);
+    console.log({ schema });
+
+    const ydoc = prosemirrorJSONToYDoc(schema, this.value);
+    console.log({ ydoc });
+
+    const node = yDocToProsemirrorJSON(ydoc);
+    console.log({ node });
 
     this.provider = new WebrtcProvider(
       "tiptap-collaboration-extension-test",
@@ -48,7 +70,7 @@ export default {
     );
 
     this.editor = new Editor({
-      content: this.value,
+      // content: this.value,
       editorProps: {
         attributes: {
           class:
@@ -56,9 +78,6 @@ export default {
         },
       },
       extensions: [
-        CharacterCount.configure({
-          limit: 10000,
-        }),
         Collaboration.configure({
           document: ydoc,
         }),
@@ -69,12 +88,7 @@ export default {
             color: "#f783ac",
           },
         }),
-        Highlight,
-        StarterKit.configure({
-          history: false,
-        }),
-        TaskItem,
-        TaskList,
+        ...this.extensions,
       ],
     });
   },
