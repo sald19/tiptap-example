@@ -40,6 +40,7 @@ export default {
     return {
       editor: null,
       provider: null,
+      proseMirrorJson: null,
       extensions: [
         CharacterCount.configure({
           limit: 10000,
@@ -61,8 +62,7 @@ export default {
     const ydoc = prosemirrorJSONToYDoc(schema, this.value);
     console.log({ ydoc });
 
-    const node = yDocToProsemirrorJSON(ydoc);
-    console.log({ node });
+    this.proseMirrorJson = yDocToProsemirrorJSON(ydoc);
 
     this.provider = new WebrtcProvider(
       "tiptap-collaboration-extension-test",

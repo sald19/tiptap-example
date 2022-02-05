@@ -22,16 +22,7 @@ export default {
             content: [
               {
                 type: "text",
-                text: "Example ",
-              },
-              {
-                type: "text",
-                marks: [
-                  {
-                    type: "bold",
-                  },
-                ],
-                text: "Text",
+                text: "Example text",
               },
             ],
           },
